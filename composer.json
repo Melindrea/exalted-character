@@ -1,0 +1,8 @@
+{
+    "name": "melindrea/exalted-character",
+    "autoload": {
+        "psr-4" : {
+            "Melindrea\\Exalted\\" : "src"
+        }
+    }
+}
