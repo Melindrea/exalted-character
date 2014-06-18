@@ -1,7 +1,9 @@
 <?php
-namespace Test;
+namespace Melindrea\Test;
 
-class ExampleTest extends \PHPUnit_Framework_TestCase
+use \Melindrea\Test\BaseTestCase as Base;
+
+class ExampleTest extends Base
 {
 
     /**

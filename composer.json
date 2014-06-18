@@ -10,7 +10,8 @@
     ],
     "require-dev": {
         "squizlabs/php_codesniffer": "2.0.*@dev",
-        "phpunit/phpunit": "4.3.*@dev"
+        "phpunit/phpunit": "4.3.*@dev",
+        "mockery/mockery": "dev-master"
     },
     "config": {
         "vendor-dir": "vendor",
@@ -20,7 +21,8 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4" : {
-            "Melindrea\\Exalted\\" : "src"
+            "Melindrea\\Exalted\\" : "src",
+            "Melindrea\\Test\\" : "test/tests/"
         }
     }
 }

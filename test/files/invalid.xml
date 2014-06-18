@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ExaltedCharacter repositoryId="LastWish" repositoryPrintName="Last Wish">
+  <Description>
+    <CharacterName><![CDATA[Last Wish]]></CharacterName>
+    <Player><![CDATA[Melindrea]]></Player>
+    <Characterization><![CDATA[A woman of contrasts, a good heart that has seen too much in her search for justice, while still believing in good.]]></Characterization>
+    <Sex><![CDATA[f]]></Sex>
+  </Description>
+  <Description>
+    <CharacterName><![CDATA[Last Wish]]></CharacterName>
+    <Player><![CDATA[Melindrea]]></Player>
+    <Characterization><![CDATA[A woman of contrasts, a good heart that has seen too much in her search for justice, while still believing in good.]]></Characterization>
+    <Sex><![CDATA[f]]></Sex>
+  </Description>
+  <Statistics experienced="false">
+    <Rules>
+      <RuleSet name="SecondEdition"/>
+    </Rules>
+    <CharacterType subtype="TemplateType.Default">Solar</CharacterType>
+    <CharacterConcept age="30">
+      <Caste type="Zenith"/>
+      <Motivation><![CDATA[Free the souls of the serial killer she's hunting]]></Motivation>
+    </CharacterConcept>
+    <Essence creationValue="3"/>
+    <Willpower creationValue="7"/>
+    <Virtues>
+      <Compassion creationValue="3"/>
+      <Conviction creationValue="3"/>
+      <Temperance creationValue="2"/>
+      <Valor creationValue="2"/>
+    </Virtues>
+    <Attributes>
+      <Physical>
+        <Strength creationValue="2"/>
+        <Dexterity creationValue="3"/>
+        <Stamina creationValue="2"/>
+      </Physical>
+      <Social>
+        <Charisma creationValue="4"/>
+        <Manipulation creationValue="3"/>
+        <Appearance creationValue="4"/>
+      </Social>
+      <Mental>
+        <Perception creationValue="3"/>
+        <Intelligence creationValue="3"/>
+        <Wits creationValue="3"/>
+      </Mental>
+    </Attributes>
+    <Abilities>
+      <Archery creationValue="1"/>
+      <MartialArts creationValue="1"/>
+      <Melee creationValue="2" favored="true"/>
+      <Thrown creationValue="0"/>
+      <War creationValue="1"/>
+      <Integrity creationValue="3">
+        <Specialty creationValue="1" name="Torture"/>
+      </Integrity>
+      <Performance creationValue="2"/>
+      <Presence creationValue="4">
+        <Specialty creationValue="1" name="Interrogation"/>
+      </Presence>
+      <Resistance creationValue="2"/>
+      <Survival creationValue="2"/>
+      <Craft>
+        <subTrait creationValue="0">
+          <traitName><![CDATA[Air]]></traitName>
+        </subTrait>
+        <subTrait creationValue="0">
+          <traitName><![CDATA[Earth]]></traitName>
+        </subTrait>
+        <subTrait creationValue="0">
+          <traitName><![CDATA[Fire]]></traitName>
+        </subTrait>
+        <subTrait creationValue="0">
+          <traitName><![CDATA[Water]]></traitName>
+        </subTrait>
+        <subTrait creationValue="0">
+          <traitName><![CDATA[Wood]]></traitName>
+        </subTrait>
+      </Craft>
+      <Investigation creationValue="4" favored="true">
+        <Specialty creationValue="1" name="Reconstructing Events"/>
+      </Investigation>
+      <Lore creationValue="2"/>
+      <Medicine creationValue="0"/>
+      <Occult creationValue="3" favored="true">
+        <Specialty creationValue="1" name="Ghosts"/>
+      </Occult>
+      <Athletics creationValue="2"/>
+      <Awareness creationValue="2" favored="true"/>
+      <Dodge creationValue="1"/>
+      <Larceny creationValue="1"/>
+      <Stealth creationValue="0"/>
+      <Bureaucracy creationValue="1"/>
+      <Linguistics creationValue="1"/>
+      <Ride creationValue="1"/>
+      <Sail creationValue="0"/>
+      <Socialize creationValue="2" favored="true"/>
+    </Abilities>
+    <Backgrounds>
+      <Background creationValue="1"><![CDATA[Contacts]]>
+        <Description><![CDATA[Iron Heart of the Ears of the North]]></Description>
+      </Background>
+      <Background creationValue="2"><![CDATA[Artifact]]>
+        <Description><![CDATA[Ori Switchklaive]]></Description>
+      </Background>
+      <Background creationValue="2"><![CDATA[Artifact]]>
+        <Description><![CDATA[Dragon Tear Tiara]]></Description>
+      </Background>
+      <Background creationValue="2"><![CDATA[Resources]]></Background>
+      <Background creationValue="2"><![CDATA[Manse]]>
+        <Description><![CDATA[Jewel of Swift Comprehension]]></Description>
+      </Background>
+    </Backgrounds>
+    <Charms>
+      <CharmGroup name="Presence" type="Solar">
+        <Charm name="Solar.Enemy-CastigatingSolarJudgement" experienceLearned="false"/>
+        <Charm name="Solar.1stExcellency.Presence" experienceLearned="false"/>
+      </CharmGroup>
+      <CharmGroup name="Integrity" type="Solar">
+        <Charm name="Solar.3rdExcellency.Integrity" experienceLearned="false"/>
+      </CharmGroup>
+      <CharmGroup name="Resistance" type="Solar">
+        <Charm name="Solar.Body-MendingMeditation" experienceLearned="false"/>
+      </CharmGroup>
+      <CharmGroup name="Occult" type="Solar">
+        <Charm name="Solar.2ndExcellency.Occult" experienceLearned="false"/>
+        <Charm name="Solar.Spirit-DetectingGlance" experienceLearned="false"/>
+      </CharmGroup>
+      <CharmGroup name="Performance" type="Solar">
+        <Charm name="Solar.2ndExcellency.Performance" experienceLearned="false"/>
+      </CharmGroup>
+      <CharmGroup name="Melee" type="Solar">
+        <Charm name="Solar.OneWeapon,TwoBlows" experienceLearned="false"/>
+        <Charm name="Solar.1stExcellency.Melee" experienceLearned="false"/>
+      </CharmGroup>
+      <CharmGroup name="Investigation" type="Solar">
+        <Charm name="Solar.2ndExcellency.Investigation" experienceLearned="false"/>
+        <Charm name="Solar.Judge'sEarTechnique" experienceLearned="false"/>
+      </CharmGroup>
+      <Combos/>
+      <CharmFilters>
+        <ObtainFilter enabled="true"/>
+        <SourceFilter showprereqs="false">
+          <SourceBook name="BrokenWingedCrane" edition="SecondEdition"/>
+          <SourceBook name="Infernals" edition="SecondEdition"/>
+        </SourceFilter>
+        <EssenceFilter enabled="true" essence="3"/>
+      </CharmFilters>
+    </Charms>
+    <Spells/>
+    <Experience/>
+    <AdditionalModels>
+      <Model templateId="Mutations">
+        <Content>
+          <Mutations/>
+        </Content>
+      </Model>
+      <Model templateId="Equipment">
+        <Content>
+          <item>
+            <templateId><![CDATA[Natural]]></templateId>
+            <printedStats><![CDATA[Punch]]></printedStats>
+            <printedStats><![CDATA[Kick]]></printedStats>
+            <printedStats><![CDATA[Clinch]]></printedStats>
+          </item>
+          <item>
+            <templateId><![CDATA[Dragon Tear Tiara]]></templateId>
+            <material><![CDATA[Orichalcum]]></material>
+            <printedStats><![CDATA[Artifact.FullyAttuned]]></printedStats>
+          </item>
+          <item>
+            <templateId><![CDATA[Switchklaive]]></templateId>
+            <material><![CDATA[Orichalcum]]></material>
+            <printedStats><![CDATA[Close]]></printedStats>
+            <printedStats><![CDATA[Artifact.FullyAttuned]]></printedStats>
+          </item>
+          <item>
+            <templateId><![CDATA[Buff Jacket]]></templateId>
+            <printedStats><![CDATA[Armour]]></printedStats>
+          </item>
+        </Content>
+      </Model>
+      <Model templateId="Intimacies">
+        <Content>
+          <Intimacies/>
+        </Content>
+      </Model>
+      <Model templateId="Craft">
+        <Content/>
+      </Model>
+      <Model templateId="Linguistics">
+        <Content>
+          <linguistics>
+            <language><![CDATA[Skytongue]]></language>
+          </linguistics>
+        </Content>
+      </Model>
+      <Model templateId="Specialties">
+        <Content/>
+      </Model>
+      <Model templateId="SolarVirtueFlaw">
+        <Content>
+          <VirtueFlaw>
+            <RootVirtue name="Compassion"/>
+            <Name><![CDATA[Compassionate Martyrdom]]></Name>
+            <Limit creationValue="0"/>
+          </VirtueFlaw>
+        </Content>
+      </Model>
+    </AdditionalModels>
+  </Statistics>
+
