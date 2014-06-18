@@ -6,12 +6,9 @@ use \Melindrea\Exalted as ME;
 class XML implements \Melindrea\Exalted\Interfaces\Loadable
 {
     protected $character;
-    protected $path;
 
     public function __construct($path)
     {
-        $this->path = $path;
-
         $this->character = $this->createCharacter($this->loadDocument($path));
     }
 
