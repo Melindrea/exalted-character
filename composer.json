@@ -1,5 +1,23 @@
 {
     "name": "melindrea/exalted-character",
+    "version": "0.0.1",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marie Hogebrandt",
+            "email": "iam@mariehogebrandt.se"
+        }
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "2.0.*@dev",
+        "phpunit/phpunit": "4.3.*@dev"
+    },
+    "config": {
+        "vendor-dir": "vendor",
+        "bin-dir": "vendor/bin",
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4" : {
             "Melindrea\\Exalted\\" : "src"
