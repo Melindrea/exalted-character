@@ -9,7 +9,7 @@ class Zip extends XML
 
     public function __construct($path)
     {
-        $this->character = $this->createCharacter($this->unpackFile($path));
+        $this->character = $this->convertToCharacter($this->unpackFile($path));
     }
 
     protected function unpackFile($path)

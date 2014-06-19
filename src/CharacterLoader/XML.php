@@ -9,7 +9,7 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
 
     public function __construct($path)
     {
-        $this->character = $this->createCharacter($this->loadDocument($path));
+        $this->character = $this->convertToCharacter($this->loadDocument($path));
     }
 
     public function getCharacter()
@@ -37,7 +37,7 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
         return $document;
     }
 
-    protected function createCharacter(\DOMDocument $xml)
+    protected function convertToCharacter(\DOMDocument $xml)
     {
         $xmlType = $xml->getElementsByTagName('CharacterType');
 
