@@ -15,27 +15,43 @@ class Zip extends XML
     protected function unpackFile($path)
     {
         if (! (is_file($path))) {
-            throw new ME\Exceptions\FileException(sprintf('File: %s does not exist', $path));
+            throw new ME\Exceptions\FileException(
+                sprintf('File: %s does not exist', $path)
+            );
         }
-        return new \DOMDocument();
-        // return $this->loadDocument(sprintf('zip:/%s#ExaltedCharacter/LastWish.ecg', $path));
-    }
 
-    protected function loadDocument($path)
-    {
-        $startsWithHttp = (strpos($path, 'http') === 0);
-        if (! (file_exists($path) || $startsWithHttp)) {
-            throw new ME\Exceptions\FileException(sprintf('File: %s does not exist', $path));
+        $archive = zip_open($path);
+
+        if (! (is_resource($archive))) {
+            throw new ME\Exceptions\ZipFileException(
+                sprintf('Error opening %s', $path)
+            );
+        }
+
+        $content = false;
+
+        while ($entry = zip_read($archive)) {
+            $extension = pathinfo(zip_entry_name($entry), PATHINFO_EXTENSION);
+
+            // This finds the first ecg file, reads 3Mb and quits the loop
+            if ($extension == 'ecg' || $extension == 'xml') {
+                $content = zip_entry_read($entry, 30000);
+                break;
+            }
+        }
+
+        if (! $content) {
+            throw new ME\Exceptions\ZipFileException(
+                sprintf('Invalid archive %s', $path)
+            );
         }
 
         $document = new \DOMDocument();
 
-        if (@$document->load($path) === false) {
-            if ($startsWithHttp) {
-                throw new ME\Exceptions\RemoteFileException(sprintf('Remote File: %s can not be read', $path));
-            } else {
-                throw new ME\Exceptions\InvalidXMLException(sprintf('%s is invalid XML', $path));
-            }
+        if (@$document->loadXML($content) === false) {
+            throw new ME\Exceptions\InvalidXMLException(
+                sprintf('%s contains invalid XML-file', $path)
+            );
         }
 
         return $document;

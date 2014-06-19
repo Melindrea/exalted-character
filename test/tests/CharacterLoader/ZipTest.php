@@ -42,4 +42,35 @@ class ZipTest extends Base
         $this->assertInstanceOf('Melindrea\Exalted\Character', $this->object->getCharacter());
     }
 
+    /**
+     * @expectedException Melindrea\Exalted\Exceptions\FileException
+     */
+    public function testNonexistingFile()
+    {
+        new ZipLoader('does/not/exist');
+    }
+
+    /**
+     * @expectedException Melindrea\Exalted\Exceptions\ZipFileException
+     */
+    public function testNonZipFile()
+    {
+        new ZipLoader(sprintf('%sfiles/valid.xml', $this->path));
+    }
+
+    /**
+     * @expectedException Melindrea\Exalted\Exceptions\ZipFileException
+     */
+    public function testInvalidFile()
+    {
+        new ZipLoader(sprintf('%sfiles/empty.zip', $this->path));
+    }
+
+    /**
+     * @expectedException Melindrea\Exalted\Exceptions\InvalidXMLException
+     */
+    public function testInvalidXMLFile()
+    {
+        new ZipLoader(sprintf('%sfiles/invalid.zip', $this->path));
+    }
 }

@@ -16,7 +16,8 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
         $this->path = sprintf('%s/../', dirname(__FILE__));
     }
 
-    protected function tearDown() {
+    protected function tearDown()
+    {
         \Mockery::close();
         parent::tearDown();
     }
