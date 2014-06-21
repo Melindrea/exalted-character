@@ -56,9 +56,38 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
 
     protected function getAttributes(\DOMDocument $xml)
     {
+        $map = array(
+            'Strength' => 'Strength',
+            'Dexterity' => 'Dexterity',
+            'Stamina' => 'Stamina',
+            'Charisma' => 'Charisma',
+            'Manipulation' => 'Manipulation',
+            'Appearance' => 'Appearance',
+            'Perception' => 'Perception',
+            'Intelligence' => 'Intelligence',
+            'Wits' => 'Wits',
+        );
 
-        $attributes = new ME\Character\Attributes(array());
-        return $attributes;
+        $attributes = $this->parseElementAttributes($xml, $map, 'creationValue');
+        $traits = array();
+
+        $map = array(
+            'Physical' => array('Strength', 'Dexterity', 'Stamina'),
+            'Social' => array('Charisma', 'Manipulation', 'Appearance'),
+            'Mental' => array('Perception', 'Intelligence', 'Wits'),
+        );
+
+        foreach ($map as $type => $givenTraits) {
+            $group = new ME\Character\Traits($type);
+
+            foreach ($givenTraits as $trait) {
+                $group->{$trait} = $attributes[$trait];
+            }
+
+            $traits[] = $group;
+        }
+
+        return new ME\Character\Attributes($traits);
     }
 
     protected function parseValues(\DOMDocument $xml)
@@ -74,7 +103,7 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
         $map = array(
             'name' => 'CharacterName',
             'player' => 'Player',
-            'characterization' => 'Characterization',
+            'concept' => 'Characterization',
             'motivation' => 'Motivation',
         );
 

@@ -2,13 +2,13 @@
 namespace Melindrea\Test;
 
 use \Melindrea\Test\BaseTestCase as Base;
-use \Melindrea\Exalted\Character as Character;
+use \Melindrea\Exalted\CharacterTrait as CTrait;
 
-class CharacterTest extends Base
+class CharacterTraitTest extends Base
 {
 
     /**
-     * Tests Character class.
+     * Tests CharacterTrait class.
      *
      * @return void
      */
@@ -18,21 +18,16 @@ class CharacterTest extends Base
     {
         parent::setUp();
 
-        $this->object = new Character();
+        $this->object = new CTrait('Strength', 2);
     }
 
     public function testValidObject()
     {
-        $this->assertInstanceOf('Melindrea\Exalted\Character', $this->object);
+        $this->assertInstanceOf('Melindrea\Exalted\CharacterTrait', $this->object);
     }
 
     public function testInheritance()
     {
         $this->assertInstanceOf('Melindrea\Exalted\Base', $this->object);
-    }
-
-    public function testType()
-    {
-        $this->assertNull($this->object->type());
     }
 }

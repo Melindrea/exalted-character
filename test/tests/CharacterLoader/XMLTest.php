@@ -66,6 +66,7 @@ class XMLTest extends Base
         $character = $this->object->getCharacter();
 
         $this->assertInstanceOf('Melindrea\Exalted\Character\Attributes', $character->attributes);
+        $this->assertContainsOnlyInstancesOf('Melindrea\Exalted\Character\Traits', $character->attributes->traits);
         // $this->assertEquals('Solar', $character->type, 'Type is wrong');
         // $this->assertEquals('Last Wish', $character->name, 'Name is wrong');
         // $this->assertEquals('Motivation', $character->motivation, 'Motivation is wrong');

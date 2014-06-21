@@ -1,7 +1,7 @@
 <?php
 namespace Melindrea\Exalted\Character;
 
-class Attributes
+class Attributes extends \Melindrea\Exalted\Base
 {
     public function __construct(array $traits)
     {
