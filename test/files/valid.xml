@@ -33,12 +33,14 @@
     <Attributes>
       <Physical>
         <Strength creationValue="1"/>
-        <Dexterity creationValue="1"/>
+        <Dexterity creationValue="1">
+          <Specialty creationValue="1" name="Torture"/>
+        </Dexterity>
         <Stamina creationValue="1"/>
       </Physical>
       <Social>
         <Charisma creationValue="1"/>
-        <Manipulation creationValue="1"/>
+        <Manipulation creationValue="1" favored="true"/>
         <Appearance creationValue="1"/>
       </Social>
       <Mental>

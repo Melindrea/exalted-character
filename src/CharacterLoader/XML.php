@@ -56,38 +56,45 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
 
     protected function getAttributes(\DOMDocument $xml)
     {
-        $map = array(
-            'Strength' => 'Strength',
-            'Dexterity' => 'Dexterity',
-            'Stamina' => 'Stamina',
-            'Charisma' => 'Charisma',
-            'Manipulation' => 'Manipulation',
-            'Appearance' => 'Appearance',
-            'Perception' => 'Perception',
-            'Intelligence' => 'Intelligence',
-            'Wits' => 'Wits',
-        );
-
-        $attributes = $this->parseElementAttributes($xml, $map, 'creationValue');
+        $attributes = $xml->getElementsByTagName('Attributes')->item(0);
         $traits = array();
 
-        $map = array(
-            'Physical' => array('Strength', 'Dexterity', 'Stamina'),
-            'Social' => array('Charisma', 'Manipulation', 'Appearance'),
-            'Mental' => array('Perception', 'Intelligence', 'Wits'),
-        );
+        foreach ($attributes->childNodes as $group) {
+            $groupName = $group->nodeName;
+            if ($groupName != '#text') {
+                $traitGroup = new ME\Character\Traits($groupName);
+                foreach ($group->childNodes as $attribute) {
+                    $attributeName = $attribute->nodeName;
+                    if ($attributeName != '#text') {
+                        $traitGroup->{$attributeName} = $this->parseTrait($attribute);
+                    }
 
-        foreach ($map as $type => $givenTraits) {
-            $group = new ME\Character\Traits($type);
-
-            foreach ($givenTraits as $trait) {
-                $group->{$trait} = $attributes[$trait];
+                }
+                $traits[] = $traitGroup;
             }
+        }
+        return new ME\Character\Attributes($traits);
+    }
 
-            $traits[] = $group;
+    protected function parseTrait(\DOMNode $trait)
+    {
+        $value = $trait->getAttribute('creationValue');
+        $name = $trait->nodeName;
+        $favored = ($trait->getAttribute('favored') == true);
+        $specialtyArray = array();
+
+        if ($trait->hasChildNodes()) {
+            $specialties = $trait->getElementsByTagName('Specialty');
+
+            foreach ($specialties as $specialty) {
+                $specialtyName = $specialty->getAttribute('name');
+                $specialtyValue = $specialty->getAttribute('creationValue');
+
+                $specialtyArray[] = new ME\Character\Specialty($specialtyName, $specialtyValue);
+            }
         }
 
-        return new ME\Character\Attributes($traits);
+        return new ME\CharacterTrait($name, $value, $favored, $specialtyArray);
     }
 
     protected function parseValues(\DOMDocument $xml)
