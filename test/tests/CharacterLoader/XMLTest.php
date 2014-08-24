@@ -60,23 +60,4 @@ class XMLTest extends Base
     {
         new XMLLoader(sprintf('%sfiles/invalid.xml', $this->path));
     }
-
-    public function testCharacterConverting()
-    {
-        $character = $this->object->getCharacter();
-
-        $this->assertInstanceOf('Melindrea\Exalted\Character\Attributes', $character->attributes);
-        $this->assertContainsOnlyInstancesOf('Melindrea\Exalted\Character\Traits', $character->attributes->traits);
-        // $this->assertEquals('Solar', $character->type, 'Type is wrong');
-        // $this->assertEquals('Last Wish', $character->name, 'Name is wrong');
-        // $this->assertEquals('Motivation', $character->motivation, 'Motivation is wrong');
-        // $this->assertEquals('Something', $character->characterization, 'Characterization is wrong');
-        // $this->assertEquals('Melindrea', $character->player, 'Player is wrong');
-        // $this->assertEquals(1, $character->essence, 'Essence is wrong');
-        // $this->assertEquals(1, $character->willpower, 'Willpower is wrong');
-        // $this->assertEquals(1, $character->compassion, 'Compassion is wrong');
-        // $this->assertEquals(1, $character->conviction, 'Conviction is wrong');
-        // $this->assertEquals(1, $character->temperance, 'Temperance is wrong');
-        // $this->assertEquals(1, $character->valor, 'Valor is wrong');
-    }
 }

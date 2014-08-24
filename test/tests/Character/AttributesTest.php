@@ -16,7 +16,7 @@ class AttributesTest extends Base
 
     public function setUp()
     {
-        $traits = array();
+        $traits = [];
         $this->object = new Attributes($traits);
     }
 

@@ -3,7 +3,7 @@ namespace Melindrea\Exalted;
 
 class Base
 {
-    protected $data = array();
+    protected $data = [];
 
     public function __get($item)
     {

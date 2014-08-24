@@ -10,6 +10,7 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
     public function __construct($path)
     {
         $this->character = $this->convertToCharacter($this->loadDocument($path));
+        print_r($this->character);
     }
 
     public function getCharacter()
@@ -47,17 +48,14 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
             $characterType = $xmlType->item(0)->nodeValue;
         }
 
-        $values = $this->parseValues($xml);
-
         return ME\Character::factory($characterType)
-            ->values($values)
-            ->set('attributes', $this->getAttributes($xml));
+            ->values($this->parseValues($xml));
     }
 
     protected function getAttributes(\DOMDocument $xml)
     {
         $attributes = $xml->getElementsByTagName('Attributes')->item(0);
-        $traits = array();
+        $traits = [];
 
         foreach ($attributes->childNodes as $group) {
             $groupName = $group->nodeName;
@@ -66,7 +64,7 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
                 foreach ($group->childNodes as $attribute) {
                     $attributeName = $attribute->nodeName;
                     if ($attributeName != '#text') {
-                        $traitGroup->{$attributeName} = $this->parseTrait($attribute);
+                        $traitGroup->{$attributeName} = $this->parseTrait($attribute, 'Attribute');
                     }
 
                 }
@@ -76,12 +74,43 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
         return new ME\Character\Attributes($traits);
     }
 
-    protected function parseTrait(\DOMNode $trait)
+    protected function getVirtues(\DOMDocument $xml)
+    {
+        $map = [
+            'compassion' => 'Compassion',
+            'conviction' => 'Conviction',
+            'temperance' => 'Temperance',
+            'valor' => 'Valor',
+        ];
+
+        $virtues = $this->parseElementAttributes($xml, $map, 'creationValue');
+
+        return new ME\Character\Virtues(
+            $virtues['compassion'],
+            $virtues['conviction'],
+            $virtues['temperance'],
+            $virtues['valor']
+        );
+    }
+
+    protected function getLanguages(\DOMDocument $xml)
+    {
+        $languages = [];
+        $items = $xml->getElementsByTagName('language');
+
+        if ($items->length) {
+            $languages[] = $items->item(0)->nodeValue;
+        }
+
+        return $languages;
+    }
+
+    protected function parseTrait(\DOMNode $trait, $type)
     {
         $value = $trait->getAttribute('creationValue');
         $name = $trait->nodeName;
         $favored = ($trait->getAttribute('favored') == true);
-        $specialtyArray = array();
+        $specialtyArray = [];
 
         if ($trait->hasChildNodes()) {
             $specialties = $trait->getElementsByTagName('Specialty');
@@ -94,27 +123,36 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
             }
         }
 
-        return new ME\CharacterTrait($name, $value, $favored, $specialtyArray);
+        return ME\CharacterTrait::factory($type, $name, $value, $favored, $specialtyArray);
     }
 
     protected function parseValues(\DOMDocument $xml)
     {
         $values = $this->parseSingularStats($xml);
         $values = array_merge($values, $this->parseCreationValues($xml));
+        $values = array_merge($values, $this->parseNameValues($xml));
+        $values = array_merge($values, $this->parseTypeValues($xml));
+        $values = array_merge($values, $this->parseAgeValues($xml));
+        $values = array_merge($values, ['virtues' => $this->getVirtues($xml)]);
+        $values = array_merge($values, ['attributes' => $this->getAttributes($xml)]);
+        $values = array_merge($values, ['languages' => $this->getLanguages($xml)]);
 
         return $values;
     }
 
     protected function parseSingularStats(\DOMDocument $xml)
     {
-        $map = array(
+        $map = [
             'name' => 'CharacterName',
             'player' => 'Player',
             'concept' => 'Characterization',
             'motivation' => 'Motivation',
-        );
+            'description' => 'PhysicalDescription',
+            'notes' => 'Notes',
+            'anima' => 'Anima',
+        ];
 
-        $values = array();
+        $values = [];
 
         foreach ($map as $key => $tag) {
             $items = $xml->getElementsByTagName($tag);
@@ -129,21 +167,54 @@ class XML implements \Melindrea\Exalted\Interfaces\Loadable
 
     protected function parseCreationValues(\DOMDocument $xml)
     {
-        $map = array(
+        $map = [
             'essence' => 'Essence',
             'willpower' => 'Willpower',
-            'compassion' => 'Compassion',
-            'conviction' => 'Conviction',
-            'temperance' => 'Temperance',
-            'valor' => 'Valor',
-        );
+        ];
 
-        return $this->parseElementAttributes($xml, $map, 'creationValue');
+        $values = $this->parseElementAttributes($xml, $map, 'creationValue');
+
+        $values = array_map(
+            function ($value, $key) {
+                $class = sprintf('\Melindrea\Exalted\Character\%s', ucfirst($key));
+                return new $class($value);
+            },
+            $values,
+            array_keys($values)
+        );
+        return $values;
+    }
+
+    protected function parseNameValues(\DOMDocument $xml)
+    {
+        $map = [
+            'ruleset' => 'RuleSet',
+        ];
+
+        return $this->parseElementAttributes($xml, $map, 'name');
+    }
+
+    protected function parseTypeValues(\DOMDocument $xml)
+    {
+        $map = [
+            'caste' => 'Caste',
+        ];
+
+        return $this->parseElementAttributes($xml, $map, 'type');
+    }
+
+    protected function parseAgeValues(\DOMDocument $xml)
+    {
+        $map = [
+            'age' => 'CharacterConcept',
+        ];
+
+        return $this->parseElementAttributes($xml, $map, 'age');
     }
 
     protected function parseElementAttributes(\DOMDocument $xml, $map, $attribute)
     {
-        $values = array();
+        $values = [];
 
         foreach ($map as $key => $tag) {
             $items = $xml->getElementsByTagName($tag);

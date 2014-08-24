@@ -3,6 +3,8 @@ namespace Melindrea\Exalted;
 
 class Character extends Base
 {
+    use \Melindrea\Exalted\Traits\Type;
+
     public static function factory($type = null)
     {
         if ($type) {
@@ -11,17 +13,5 @@ class Character extends Base
             $class = '\Melindrea\Exalted\Character';
         }
         return new $class();
-    }
-
-    public function type()
-    {
-        $className = get_class($this);
-
-        if ($className == 'Melindrea\Exalted\Character') {
-            return null;
-        }
-        $type = str_replace('Melindrea\\Exalted\\Character\\', '', $className);
-
-        return $type;
     }
 }
